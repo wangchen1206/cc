@@ -1,16 +1,15 @@
 package com.hp.cc;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.hp.cc.executor.service.ExecutorSercice;
 import com.hp.cc.model.SysUser;
+import com.hp.cc.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,6 +20,32 @@ public class SpringbootDemoApplicationTests {
 	
 	@Autowired
 	private ExecutorSercice executorSercice;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Test
+	public void testUserService(){
+		SysUser user = userService.findByUserName("admin");
+		System.out.println("------------------"+user);
+	}
+	
+	
+	public static void main(String[] args) {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		
+		String encode = bCryptPasswordEncoder.encode("abel");
+		
+		System.out.println("----"+encode);
+		
+		boolean matches = bCryptPasswordEncoder.matches("abel", encode);
+		
+		System.out.println("------"+matches);
+		
+		
+		
+	}
+	
 	
 	@Test
 	public void testExecutorTask() throws Exception{

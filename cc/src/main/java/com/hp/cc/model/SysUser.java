@@ -55,6 +55,25 @@ public class SysUser{
 		this.roles = roles;
 	}
 
-	
-	
+	public SysUser() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public SysUser(Integer id, String username, String password,
+			boolean enabled, List<SysRole> roles) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "SysUser [id=" + id + ", username=" + username + ", password="
+				+ password + ", enabled=" + enabled + ", roles=" + roles + "]";
+	}
+
 }

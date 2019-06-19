@@ -22,7 +22,7 @@ spring:
     name: test
     url: jdbc:mysql://localhost:3306/cc?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&autoReconnectForPools=true
     username: root
-    password: 123456
+    password: 111111
     #username: lespms
     #password: root@!123
     #使用druid数据源
@@ -97,7 +97,7 @@ logback:
   appname: cc
   
 jwt: 
-  secret: cc
+  secret: jwtsecret
   expiration: 1800000
   header: Authorization
   

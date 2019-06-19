@@ -29,5 +29,9 @@ public class SysRole {
 		this.id = id;
 		this.name = name;
 	}
+	public SysRole() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 }

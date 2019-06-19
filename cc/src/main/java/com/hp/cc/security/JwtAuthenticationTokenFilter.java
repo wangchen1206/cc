@@ -23,6 +23,7 @@ import com.hp.cc.jwt.JwtTokenUtil;
 
 /**
  * 拦截器 验证令牌的合法性,获取用户信息，存入SecurityContextHolder
+ * 并且获取用户的权限,在需要权限的请求时检查用户是否有相应的权限
  * 
  * @author ck
  * @date 2019年6月18日 下午4:15:17
@@ -43,7 +44,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 			HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String token = request.getHeader(jwtTokenUtil.getHeader());
-		System.out.println("---------------    "+token);
 		if (!StringUtils.isEmpty(token)) {
 			String username = jwtTokenUtil.getUsernameFromToken(token);
 			logger.debug("checking authentication for user " + username
@@ -55,7 +55,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 				UserDetails userDetails = userDetailsService
 						.loadUserByUsername(username);
 				if (jwtTokenUtil.validateToken(token, userDetails)) {
-					// 将用户信息存入 authentication ，方便后续校验
+					// 将用户信息，权限 存入 authentication ，方便后续校验
 					UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 							username, null, userDetails.getAuthorities());
 					authentication
