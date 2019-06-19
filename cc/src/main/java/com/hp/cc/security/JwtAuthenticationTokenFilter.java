@@ -44,6 +44,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 			HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String token = request.getHeader(jwtTokenUtil.getHeader());
+		System.out.println("enter JwtAuthenticationTokenFilter");
 		if (!StringUtils.isEmpty(token)) {
 			String username = jwtTokenUtil.getUsernameFromToken(token);
 			logger.debug("checking authentication for user " + username
@@ -52,8 +53,10 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 							request.getRequestURI(), request.getRemoteAddr()));
 			if (username != null && SecurityContextHolder.getContext()
 					.getAuthentication() == null) {
+				System.out.println("manage user");
 				UserDetails userDetails = userDetailsService
 						.loadUserByUsername(username);
+				//每次请求都要校验token.
 				if (jwtTokenUtil.validateToken(token, userDetails)) {
 					// 将用户信息，权限 存入 authentication ，方便后续校验
 					UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
