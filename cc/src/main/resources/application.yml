@@ -15,8 +15,25 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     cache: false
-
-
+## redis
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: 
+    jedis:
+      pool:
+      #连接池最大阻塞等待时间
+        max-wait: -1
+      #连接池最大连接数
+        max-active: 200
+      #连接池最大空闲连接
+        max-idle: 10
+      #连接池最小空闲连接
+        min-idle: 0
+    #连接超时时间 毫秒    
+    timeout: 60000
+      
 #数据库配置
   datasource:
     name: test
@@ -98,6 +115,7 @@ logback:
   
 jwt: 
   secret: jwtsecret
-  expiration: 1800000
+  expiration: 180000
   header: Authorization
+
   

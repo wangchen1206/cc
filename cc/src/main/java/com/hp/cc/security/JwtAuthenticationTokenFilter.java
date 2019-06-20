@@ -20,6 +20,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.hp.cc.jwt.JwtTokenUtil;
+import com.hp.cc.redis.RedisService;
 
 /**
  * 拦截器 验证令牌的合法性,获取用户信息，存入SecurityContextHolder
@@ -32,6 +33,11 @@ import com.hp.cc.jwt.JwtTokenUtil;
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
 	private final Log logger = LogFactory.getLog(this.getClass());
+	
+	private final String BEARER = "Bearer";
+	
+	@Autowired
+	private RedisService redisService;
 
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -46,18 +52,18 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 		String token = request.getHeader(jwtTokenUtil.getHeader());
 		System.out.println("enter JwtAuthenticationTokenFilter");
 		if (!StringUtils.isEmpty(token)) {
-			String username = jwtTokenUtil.getUsernameFromToken(token);
+			String tokenExpected = token.substring(BEARER.length());
+			String username = jwtTokenUtil.getUsernameFromToken(tokenExpected);
 			logger.debug("checking authentication for user " + username
 					+ " who is requesting..."
 					+ String.format("%s %s from IP: %s", request.getMethod(),
 							request.getRequestURI(), request.getRemoteAddr()));
 			if (username != null && SecurityContextHolder.getContext()
 					.getAuthentication() == null) {
-				System.out.println("manage user");
-				UserDetails userDetails = userDetailsService
-						.loadUserByUsername(username);
+				//从redis中获取userDetail
+				UserDetails userDetails = redisService.getMapField(jwtTokenUtil.getHeader(), username);
 				//每次请求都要校验token.
-				if (jwtTokenUtil.validateToken(token, userDetails)) {
+				if (jwtTokenUtil.validateToken(tokenExpected, userDetails)) {
 					// 将用户信息，权限 存入 authentication ，方便后续校验
 					UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 							username, null, userDetails.getAuthorities());

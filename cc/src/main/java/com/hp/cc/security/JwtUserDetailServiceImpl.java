@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.hp.cc.jwt.JwtUser;
 import com.hp.cc.model.SysRole;
 import com.hp.cc.model.SysUser;
+import com.hp.cc.redis.RedisService;
 import com.hp.cc.service.UserService;
 
 /**
@@ -23,6 +24,7 @@ import com.hp.cc.service.UserService;
 @Service
 public class JwtUserDetailServiceImpl implements UserDetailsService {
 
+	
 	@Autowired
 	private UserService userService;
 
@@ -31,13 +33,6 @@ public class JwtUserDetailServiceImpl implements UserDetailsService {
 			throws UsernameNotFoundException {
 		SysUser user = userService.findByUserName(username);
 		
-		if (user == null) {
-			throw new UsernameNotFoundException(
-					String.format("%s .这个用户不存在", username));
-		}
-		if(!user.isEnabled()){
-			throw new DisabledException(String.format("用户名'%s'已停用", user.getUsername()));
-		}
 		List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
 				.map(SysRole::getName).map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());

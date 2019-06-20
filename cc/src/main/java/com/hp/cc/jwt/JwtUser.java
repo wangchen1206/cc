@@ -5,8 +5,12 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author ck
@@ -14,10 +18,12 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class JwtUser implements UserDetails{
 	
 	private static final long serialVersionUID = 1L;
 	private String username;
+	@JSONField(serialize = false)
 	private String password;
 	private Boolean enabled;
 	private Collection<? extends GrantedAuthority> authorities;

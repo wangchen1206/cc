@@ -4,7 +4,7 @@ package com.hp.cc.model;
  * @date 2019年2月27日 下午4:04:16
  */
 
-public class SysRole {
+public class SysRole extends BaseModel{
 
 	private Integer id;
 	private String name;

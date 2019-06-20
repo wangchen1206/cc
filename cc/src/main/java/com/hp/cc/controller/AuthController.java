@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hp.cc.common.Result;
 import com.hp.cc.jwt.JwtAuthenticationRequest;
 import com.hp.cc.jwt.JwtAuthenticationResponse;
 import com.hp.cc.service.AuthService;
@@ -25,7 +26,7 @@ public class AuthController {
 	private AuthService authService;
 
 	@PostMapping("/token")
-	public JwtAuthenticationResponse token(
+	public Result token(
 			@RequestBody JwtAuthenticationRequest jwtAuthenticationRequest) {
 
 		// 交给springsecurity管理，会去验证用户名和密码是否正确。
@@ -36,6 +37,6 @@ public class AuthController {
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		return authService.token(jwtAuthenticationRequest);
+		return Result.createBySuccess(authService.token(jwtAuthenticationRequest));
 	}
 }

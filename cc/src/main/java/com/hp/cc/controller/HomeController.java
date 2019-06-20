@@ -4,6 +4,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hp.cc.common.Result;
 import com.hp.cc.model.Msg;
 
 /**
@@ -15,7 +16,7 @@ public class HomeController {
 
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@RequestMapping("/home/test")
-	public Msg index(){
-		return new Msg("测试标题","测试内容","额外信息，只对管理员显示");
+	public Result index(){
+		return Result.createBySuccess(new Msg("测试标题","测试内容","额外信息，只对管理员显示"));
 	}
 }

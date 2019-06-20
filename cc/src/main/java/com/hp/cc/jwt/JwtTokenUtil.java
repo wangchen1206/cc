@@ -138,8 +138,10 @@ public class JwtTokenUtil {
 	 * @return 是否有效
 	 */
 	public Boolean validateToken(String token,UserDetails userDetails) {
-		JwtUser user = (JwtUser) userDetails;
+		if(userDetails == null){
+			return false;
+		}
 		String username = getUsernameFromToken(token);
-		return (username.equals(user.getUsername()) && !isTokenExpired(token));
+		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
 	}
 }
