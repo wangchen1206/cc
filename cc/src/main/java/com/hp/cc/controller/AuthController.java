@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hp.cc.common.Result;
 import com.hp.cc.jwt.JwtAuthenticationRequest;
 import com.hp.cc.jwt.JwtAuthenticationResponse;
+import com.hp.cc.jwt.JwtTokenUtil;
+import com.hp.cc.jwt.JwtUser;
 import com.hp.cc.service.AuthService;
 
 @RestController
@@ -24,6 +27,7 @@ public class AuthController {
 
 	@Autowired
 	private AuthService authService;
+	
 
 	@PostMapping("/token")
 	public Result token(

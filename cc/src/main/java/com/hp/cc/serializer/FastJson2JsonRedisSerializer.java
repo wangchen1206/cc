@@ -1,13 +1,19 @@
 package com.hp.cc.serializer;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+
 import java.nio.charset.Charset;
 
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 
 /**
  * redis fastjson序列化器
@@ -43,7 +49,7 @@ public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T>{
 		if(t == null){
 			return new byte[0];
 		}
-		return JSON.toJSONString(t, SerializerFeature.WriteClassName).getBytes(DEFAULT_CHARSET);
+		return JSON.toJSONString(t,SerializerFeature.WriteClassName).getBytes(DEFAULT_CHARSET);
 	}
 
 }

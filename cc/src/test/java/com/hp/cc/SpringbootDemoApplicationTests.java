@@ -42,25 +42,17 @@ public class SpringbootDemoApplicationTests {
 	
 	@Test
 	public void testRedis(){
-//		SysUser user = new SysUser();
-//		user.setUsername("cc");
-//		user.setCreateDate(LocalDateTime.now());
-//		redisService.set("cc", user);
-//		
-//		System.out.println(user.getCreateDate());
-//		
-//		SysUser user2 = (SysUser) redisService.get("cc");
-//		System.out.println(JSON.toJSONString(user2));
+		SysUser user = new SysUser();
+		user.setUsername("cc");
+		user.setCreateDate(LocalDateTime.now());
+		redisService.set("cc", user);
 		
-		redisService.addMap("token", "cc", "token1");
-		redisService.addMap("token", "ck", "token2");
+		System.out.println(user.getCreateDate());
 		
-		Map<String, Object> map = redisService.getMap("token");
-		for(String key:map.keySet()){
-			System.out.println("token---------------"+map.get(key));
-		}
+		SysUser user2 = (SysUser) redisService.get("cc");
+		System.out.println(JSON.toJSONString(user2));
 		
-		System.out.println(redisService.getMapField("token", "cc").toString());
+		
 	}
 	
 	

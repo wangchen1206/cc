@@ -26,7 +26,7 @@ import com.hp.cc.security.JwtAuthenticationTokenFilter;
  */
 @Configuration
 @EnableWebSecurity
-//开启 security注解生效
+// 开启 security注解生效
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -40,15 +40,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
-	// 处理未认证的request
-	@Autowired
-	private JwtAuthenticationEntryPoint unauthorizedHandler;
-	
-	//处理没有权限的request
-	@Autowired
-	private AccessDeniedEntryPoint accessDeniedEntryPoint;
+	// // 处理未认证的request
+	// @Autowired
+	// private JwtAuthenticationEntryPoint unauthorizedHandler;
+	//
+	// //处理没有权限的request
+	// @Autowired
+	// private AccessDeniedEntryPoint accessDeniedEntryPoint;
 
-	//密码加密器 每次加密的密码都不一样
+	// 密码加密器 每次加密的密码都不一样
 	@Bean
 	BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -64,8 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * 添加我们自定义的user detail service 认证
 	 */
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+	protected void configure(AuthenticationManagerBuilder auth)
+			throws Exception {
+		auth.userDetailsService(userDetailsService)
+				.passwordEncoder(bCryptPasswordEncoder());
 	}
 
 	/*
@@ -75,19 +77,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 				// 禁用csrf
-				.csrf().disable().exceptionHandling().accessDeniedHandler(accessDeniedEntryPoint).authenticationEntryPoint(unauthorizedHandler).and()
+				// .csrf().disable().exceptionHandling().accessDeniedHandler(accessDeniedEntryPoint).authenticationEntryPoint(unauthorizedHandler).and()
+				.csrf().disable().exceptionHandling().and()
 				// 不创建session
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/api/**/**").permitAll()
-				//需验证了才能访问
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.authorizeRequests().antMatchers("/api/**/**").permitAll()
+				// 需验证了才能访问
 				.antMatchers("/home/**").authenticated()
-				//其他放行
+				// 其他放行
 				.anyRequest().permitAll();
 
-		//添加 令牌 权限验证 拦截器，在认证拦截器之前
-		httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-		
-		//禁用页面缓存
+		// 添加 令牌 权限验证 拦截器，在认证拦截器之前
+		httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter(),
+				UsernamePasswordAuthenticationFilter.class);
+
+		// 禁用页面缓存
 		httpSecurity.headers().cacheControl();
 	}
 }

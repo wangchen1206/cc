@@ -13,8 +13,6 @@ import com.hp.cc.redis.RedisService;
 @Service
 public class AuthService {
 
-	@Autowired
-	private UserDetailsService userDetailsService;
 	
 	@Autowired
 	private RedisService redisService;
@@ -24,11 +22,9 @@ public class AuthService {
 	
 	public JwtAuthenticationResponse token(JwtAuthenticationRequest jwtAuthenticationRequest) {
 		
-		UserDetails userDetails = userDetailsService.loadUserByUsername(jwtAuthenticationRequest.getUsername());
+		//从redis 取出
+		UserDetails userDetails = redisService.getMapField(jwtTokenUtil.getHeader(), jwtAuthenticationRequest.getUsername());
 		String token = jwtTokenUtil.generateToken(userDetails);
-		
-		//redis 做缓存
-		redisService.addMap(jwtTokenUtil.getHeader(), userDetails.getUsername(), userDetails,jwtTokenUtil.getExpiration()/1000);
 		return new JwtAuthenticationResponse(token);
 		
 	}

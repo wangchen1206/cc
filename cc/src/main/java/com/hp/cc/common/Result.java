@@ -1,16 +1,13 @@
 package com.hp.cc.common;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import com.alibaba.fastjson.annotation.JSONField;
 
 /**
  * 统一的API返回接口
- *
- * @author dongxing
- * @create 2018-06-14 12:14
+ * 
  **/
 public class Result<T> implements Serializable {
 
@@ -21,34 +18,35 @@ public class Result<T> implements Serializable {
 
     private T data;
 
-    private String date;
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime date;
 
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    //private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
      * 使用了类上面那个注解，在这种情况下，只返回code，不会有msg和data
      *
      * @param code
      */
-    public Result(Integer code, String date) {
+    public Result(Integer code, LocalDateTime date) {
         this.code = code;
         this.date = date;
 
     }
 
-    public Result(Integer code, String msg, String date) {
+    public Result(Integer code, String msg, LocalDateTime date) {
         this.code = code;
         this.msg = msg;
         this.date = date;
     }
 
-    public Result(Integer code, T data, String date) {
+    public Result(Integer code, T data, LocalDateTime date) {
         this.code = code;
         this.date = date;
         this.data = data;
     }
 
-    public Result(Integer code, String msg, T data, String date) {
+    public Result(Integer code, String msg, T data, LocalDateTime date) {
         this.code = code;
         this.date = date;
         this.msg = msg;
@@ -77,7 +75,7 @@ public class Result<T> implements Serializable {
         return data;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -88,7 +86,7 @@ public class Result<T> implements Serializable {
      * @return
      */
     public static <T> Result<T> createBySuccess() {
-        return new Result<T>(ResponseCode.SUCCESS.getCode(), formatter.format(LocalDateTime.now()));
+        return new Result<T>(ResponseCode.SUCCESS.getCode(), LocalDateTime.now());
     }
 
     /**
@@ -99,7 +97,7 @@ public class Result<T> implements Serializable {
      * @return
      */
     public static <T> Result<T> createBySuccessMessage(String msg) {
-        return new Result<T>(ResponseCode.SUCCESS.getCode(), msg, formatter.format(LocalDateTime.now()));
+        return new Result<T>(ResponseCode.SUCCESS.getCode(), msg, LocalDateTime.now());
     }
 
     /**
@@ -110,7 +108,7 @@ public class Result<T> implements Serializable {
      * @return
      */
     public static <T> Result<T> createBySuccess(T data) {
-        return new Result<T>(ResponseCode.SUCCESS.getCode(), data, formatter.format(LocalDateTime.now()));
+        return new Result<T>(ResponseCode.SUCCESS.getCode(), data, LocalDateTime.now());
     }
 
     /**
@@ -122,7 +120,7 @@ public class Result<T> implements Serializable {
      * @return
      */
     public static <T> Result<T> createBySuccess(String msg, T data) {
-        return new Result<T>(ResponseCode.SUCCESS.getCode(), msg, data, formatter.format(LocalDateTime.now()));
+        return new Result<T>(ResponseCode.SUCCESS.getCode(), msg, data, LocalDateTime.now());
     }
 
     /**
@@ -132,7 +130,7 @@ public class Result<T> implements Serializable {
      * @return
      */
     public static <T> Result<T> createByError() {
-        return new Result<T>(ResponseCode.BAD_REQUEST.getCode(), ResponseCode.BAD_REQUEST.getDesc(), formatter.format(LocalDateTime.now()));
+        return new Result<T>(ResponseCode.BAD_REQUEST.getCode(), ResponseCode.BAD_REQUEST.getDesc(), LocalDateTime.now());
     }
 
     /**
@@ -143,7 +141,7 @@ public class Result<T> implements Serializable {
      * @return
      */
     public static <T> Result<T> createByErrorMessage(String errorMessage) {
-        return new Result<T>(ResponseCode.BAD_REQUEST.getCode(), errorMessage, formatter.format(LocalDateTime.now()));
+        return new Result<T>(ResponseCode.BAD_REQUEST.getCode(), errorMessage, LocalDateTime.now());
     }
 
     /**
@@ -155,7 +153,7 @@ public class Result<T> implements Serializable {
      * @return
      */
     public static <T> Result<T> createByErrorCodeMessage(int erroeCode, String errorMessage) {
-        return new Result<T>(erroeCode, errorMessage, formatter.format(LocalDateTime.now()));
+        return new Result<T>(erroeCode, errorMessage, LocalDateTime.now());
     }
 
     public enum ResponseCode {
@@ -168,7 +166,10 @@ public class Result<T> implements Serializable {
         INTERNAL_SERVER_ERROR(500, "Unknown Internal Error"),
         NOT_VALID_PARAM(40005, "Not valid Params"),
         NOT_SUPPORTED_OPERATION(40006, "Operation not supported"),
-        NOT_LOGIN(50000, "Not Login");
+        NOT_LOGIN(50000, "Not Login"),
+        UNAUTHORIZED(401,"Unauthorized"),
+        FORBIDDEN(403,"Access Denied"),
+    	USER_DISABLE(2019,"User Disable");
 
         private final int code;
         private final String desc;

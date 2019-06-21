@@ -1,11 +1,17 @@
 package com.hp.cc.controller;
 
+import java.time.LocalDateTime;
+
+import javax.validation.Valid;
+
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hp.cc.common.Result;
 import com.hp.cc.model.Msg;
+import com.hp.cc.model.SysUser;
 
 /**
  * @author ck
@@ -17,6 +23,15 @@ public class HomeController {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@RequestMapping("/home/test")
 	public Result index(){
-		return Result.createBySuccess(new Msg("测试标题","测试内容","额外信息，只对管理员显示"));
+		SysUser user = new SysUser();
+		user.setUsername("scs");
+		user.setCreateDate(LocalDateTime.now());
+		return Result.createBySuccess(user);
+	}
+	
+	@RequestMapping("/home/test2")
+	public Msg test(@RequestBody @Valid Msg msg){
+		msg.setEtraInfo("etraInfo");
+		return msg;
 	}
 }

@@ -12,6 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSON;
+import com.hp.cc.common.Result;
+
 /**
  * 未认证 处理
  * @author wangchen
@@ -26,7 +29,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authenticationException)
 			throws IOException, ServletException {
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authenticationException.getMessage());
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().write(JSON.toJSONString(Result.createByErrorCodeMessage(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorizedddd")));
 	}
 
 }
