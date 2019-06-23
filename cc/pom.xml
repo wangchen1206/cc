@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ck</groupId>
-	<artifactId>security</artifactId>
+	<artifactId>cc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>security</name>
-	<description>security</description>
+	<name>cc</name>
+	<description>cc</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
