@@ -1,4 +1,4 @@
-package com.hp.cc.config;
+/*package com.hp.cc.config;
 
 import java.util.Properties;
 
@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Configuration;
 
 import com.github.pagehelper.PageInterceptor;
 
-/**
+*//**
  * PageHelper的Page拦截器PageInterceptor，如果不进行配置，那么分页功能将没有效果
  * @author wachen
  *
- */
+ *//*
 @Configuration
 public class PageHelperConfig {
 
@@ -28,3 +28,4 @@ public class PageHelperConfig {
 		return pageInterceptor;
 	}
 }
+*/

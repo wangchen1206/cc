@@ -6,8 +6,8 @@
 		<result property="username" jdbcType="VARCHAR" column="username" />
 		<result property="password" jdbcType="VARCHAR" column="password" />
 		<result property="enabled" jdbcType="TINYINT" column="enabled" />
-		<result property="createDate" jdbcType="TIMESTAMP" column="createDate" />
-		<result property="updateDate" jdbcType="TIMESTAMP" column="updateDate" />
+		<!-- <result property="createDate" jdbcType="TIMESTAMP" column="createDate" />
+		<result property="updateDate" jdbcType="TIMESTAMP" column="updateDate" /> -->
 		<collection property="roles" ofType="com.hp.cc.model.SysRole">
 			<result column="id" jdbcType="INTEGER" property="id" />
 			<result column="name" jdbcType="VARCHAR" property="name" />

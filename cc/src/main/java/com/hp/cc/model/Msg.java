@@ -1,8 +1,11 @@
 package com.hp.cc.model;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.NotNull;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.TableField;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,15 +20,17 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Builder
-public class Msg extends BaseModel{
+public class Msg{
 	
 	@NotNull(message="title不能为null")
 	private String title;
 	private String content;
 	@JSONField(serialize = false)
 	private String etraInfo;
+	
+//	@TableField(value = "create_date")
+	private LocalDateTime createDate;
 	
 	
 	

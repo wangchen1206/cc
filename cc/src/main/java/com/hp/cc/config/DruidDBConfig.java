@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Primary;
 import com.alibaba.druid.pool.DruidDataSource;
 
 /**
- * 由于Druid暂时不在Spring Bootz中的直接支持，故需要进行配置信息的定制：
+ * 由于Druid暂时不在Spring Boot中的直接支持，故需要进行配置信息的定制：
  * 
  * @author wachen
  *

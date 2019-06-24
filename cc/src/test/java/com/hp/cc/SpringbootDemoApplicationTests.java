@@ -1,6 +1,7 @@
 package com.hp.cc;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.tomcat.jni.User;
@@ -13,7 +14,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hp.cc.dao.MsgDao;
+import com.hp.cc.dao.UserDao;
 import com.hp.cc.executor.service.ExecutorSercice;
+import com.hp.cc.model.Msg;
 import com.hp.cc.model.SysUser;
 import com.hp.cc.redis.RedisService;
 import com.hp.cc.service.UserService;
@@ -33,6 +39,33 @@ public class SpringbootDemoApplicationTests {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserDao userDao;
+	
+	@Autowired
+	private MsgDao msgDao;
+	
+	@Test
+	public void testMsgDao(){
+//		Msg msg = Msg.builder().createDate(LocalDateTime.now()).title("msg1").content("content1").etraInfo("etraInfo1").build();
+//		msgDao.insert(msg);
+		
+		 List<Msg> selectList = msgDao.selectList(null);
+		 selectList.forEach(System.out::println);;
+	}
+	
+	@Test
+	public void testMybatisPlus(){
+//		Wrapper<SysUser> wrapper = new Wr
+		List<SysUser> selectList = userDao.selectList(null);
+		selectList.forEach(sysUser->System.out.println(sysUser));
+		
+//		Page<SysUser> page = new Page<>();
+//		page.setCurrent(2).setOptimizeCountSql(true).setSize(1);
+//		page = (Page<SysUser>) userDao.selectPage(page, null);
+//		page.getRecords().forEach(sysUser->System.out.println(sysUser.getUsername()));
+	}
 	
 	@Test
 	public void testUserService(){
