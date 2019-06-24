@@ -1,16 +1,15 @@
 package com.hp.cc.model;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.baomidou.mybatisplus.annotation.TableField;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -29,7 +28,8 @@ public class Msg{
 	@JSONField(serialize = false)
 	private String etraInfo;
 	
-//	@TableField(value = "create_date")
+//	private String createDate;
+//	@TableField(value = "creatDate")
 	private LocalDateTime createDate;
 	
 	
