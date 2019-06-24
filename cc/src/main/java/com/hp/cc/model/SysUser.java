@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -25,6 +26,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=true)
 @Accessors(chain = true)
+@ToString(callSuper = true,exclude = {"password"})
 public class SysUser extends BaseModel{
 	
 	@TableId(value = "id",type = IdType.AUTO)
@@ -35,5 +37,5 @@ public class SysUser extends BaseModel{
 	@TableField(exist = false)
 	private List<SysRole> roles;
 	
-
+	
 }

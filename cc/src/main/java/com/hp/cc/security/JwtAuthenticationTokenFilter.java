@@ -29,7 +29,6 @@ import com.hp.cc.redis.RedisService;
  * @author ck
  * @date 2019年6月18日 下午4:15:17
  */
-@Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
 	private final Log logger = LogFactory.getLog(this.getClass());
@@ -50,7 +49,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 			HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String token = request.getHeader(jwtTokenUtil.getHeader());
-		System.out.println("enter JwtAuthenticationTokenFilter");
 		if (!StringUtils.isEmpty(token)) {
 			String tokenExpected = token.substring(BEARER.length());
 			String username = jwtTokenUtil.getUsernameFromToken(tokenExpected);

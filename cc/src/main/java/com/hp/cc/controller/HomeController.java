@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.validation.Valid;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,9 +30,9 @@ public class HomeController {
 		return Result.createBySuccess(user);
 	}
 	
-	@RequestMapping("/home/test2")
-	public Msg test(@RequestBody @Valid Msg msg){
+	@PostMapping("/home/test2")
+	public Result test(@RequestBody @Valid Msg msg){
 		msg.setEtraInfo("etraInfo");
-		return msg;
+		return Result.createBySuccess(msg);
 	}
 }

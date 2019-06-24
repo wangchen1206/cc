@@ -20,11 +20,9 @@ public class BaseModel {
 
 	//将时间格式化
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")
-	@TableField(value = "createDate")
 	private LocalDateTime createDate;
 	
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")
-	@TableField(value = "updateDate")
 	private LocalDateTime updateDate;
 	
 	
