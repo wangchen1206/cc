@@ -37,7 +37,7 @@ spring:
 #数据库配置
   datasource:
     name: test
-    url: jdbc:mysql://localhost:3306/cc?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&autoReconnectForPools=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/cc?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&autoReconnectForPools=true&serverTimezone=GMT&useSSL=false
     username: root
     password: 123456
     #username: lespms

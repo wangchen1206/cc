@@ -48,11 +48,11 @@ public class SpringbootDemoApplicationTests {
 	
 	@Test
 	public void testMsgDao(){
-//		Msg msg = Msg.builder().createDate(LocalDateTime.now()).title("msg1").content("content1").etraInfo("etraInfo1").build();
-//		msgDao.insert(msg);
+		Msg msg = Msg.builder().createDate(LocalDateTime.now()).title("msg2").content("content2").etraInfo("etraInfo2").build();
+		msgDao.insert(msg);
 		
-		 List<Msg> selectList = msgDao.selectList(null);
-		 selectList.forEach(System.out::println);;
+//		 List<Msg> selectList = msgDao.selectList(null);
+//		 selectList.forEach(System.out::println);;
 	}
 	
 	@Test

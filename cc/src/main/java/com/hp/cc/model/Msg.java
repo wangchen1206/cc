@@ -30,6 +30,7 @@ public class Msg{
 	
 //	private String createDate;
 //	@TableField(value = "creatDate")
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime createDate;
 	
 	
