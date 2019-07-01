@@ -9,12 +9,6 @@ server:
   servlet:
     context-path: /cc
 spring:
-  jackson:
-    default-property-inclusion: non-empty
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-    cache: false
 ## redis
   redis:
     database: 0
@@ -39,7 +33,7 @@ spring:
     name: test
     url: jdbc:mysql://localhost:3306/cc?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&autoReconnectForPools=true&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password: 123456
+    password: 111111
     #username: lespms
     #password: root@!123
     #使用druid数据源
@@ -118,13 +112,6 @@ mapper:
   not-empty: false
   identity: MYSQL
   
-#PageHelper
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
-  returnPageInfo: check 
 
 #logging:
 #  file: C:/Java/log/springboot.log
