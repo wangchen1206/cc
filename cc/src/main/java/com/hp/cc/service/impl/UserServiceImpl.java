@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hp.cc.dao.UserDao;
-import com.hp.cc.model.SysUser;
+import com.hp.cc.entity.SysUser;
+import com.hp.cc.mapper.UserDao;
 import com.hp.cc.service.UserService;
 
 /**

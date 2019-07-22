@@ -85,7 +85,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.hp.cc.model
+  type-aliases-package: com.hp.cc.entity
   global-config:
     # 数据库相关配置
     db-config:
@@ -93,8 +93,6 @@ mybatis-plus:
       id-type: AUTO
       #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
       field-strategy: NOT_EMPTY
-      #驼峰下划线转换
-      column-underline: false
       #数据库大写下划线转换
       #capital-mode: true
       #逻辑删除配置
@@ -104,7 +102,7 @@ mybatis-plus:
     refresh: true
   # 原生配置
   configuration:
-    map-underscore-to-camel-case: false
+    map-underscore-to-camel-case: true
     cache-enabled: false
   
 mapper:
@@ -117,7 +115,7 @@ mapper:
 #  file: C:/Java/log/springboot.log
 logback:
   #logdir: C:\\Users\\hpadmin\\java\\roam\\log\\roamtest
-  logdir: C:\\Java\\log\\hp-roam
+  logdir: C:\\Java\\log\\cc
   appname: cc
   
 jwt: 

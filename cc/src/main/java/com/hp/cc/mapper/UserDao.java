@@ -1,7 +1,7 @@
-package com.hp.cc.dao;
+package com.hp.cc.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.hp.cc.model.SysUser;
+import com.hp.cc.entity.SysUser;
 
 /**
  * @author ck

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hp.cc.common.Result;
-import com.hp.cc.model.Msg;
-import com.hp.cc.model.SysUser;
+import com.hp.cc.entity.Msg;
+import com.hp.cc.entity.SysUser;
 
 /**
  * @author ck

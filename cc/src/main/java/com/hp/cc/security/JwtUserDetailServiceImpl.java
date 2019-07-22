@@ -12,10 +12,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.hp.cc.entity.SysRole;
+import com.hp.cc.entity.SysUser;
 import com.hp.cc.jwt.JwtTokenUtil;
 import com.hp.cc.jwt.JwtUser;
-import com.hp.cc.model.SysRole;
-import com.hp.cc.model.SysUser;
 import com.hp.cc.redis.RedisService;
 import com.hp.cc.service.UserService;
 

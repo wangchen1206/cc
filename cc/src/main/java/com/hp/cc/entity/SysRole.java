@@ -1,4 +1,4 @@
-package com.hp.cc.model;
+package com.hp.cc.entity;
 /**
  * @author ck
  * @date 2019年2月27日 下午4:04:16

@@ -14,7 +14,7 @@ import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smackx.receipts.DeliveryReceiptRequest;
 
-import com.hp.cc.model.SysUser;
+import com.hp.cc.entity.SysUser;
 
 public class ThreadTask implements Runnable{
 

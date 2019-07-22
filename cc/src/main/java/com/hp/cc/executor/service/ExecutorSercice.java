@@ -12,7 +12,7 @@ import org.jivesoftware.smackx.receipts.DeliveryReceiptRequest;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import com.hp.cc.model.SysUser;
+import com.hp.cc.entity.SysUser;
 
 
 /**

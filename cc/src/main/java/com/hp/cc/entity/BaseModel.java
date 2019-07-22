@@ -1,4 +1,4 @@
-package com.hp.cc.model;
+package com.hp.cc.entity;
 
 import java.time.LocalDateTime;
 

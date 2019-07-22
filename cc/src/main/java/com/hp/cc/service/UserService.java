@@ -1,6 +1,6 @@
 package com.hp.cc.service;
 
-import com.hp.cc.model.SysUser;
+import com.hp.cc.entity.SysUser;
 
 /**
  * @author ck

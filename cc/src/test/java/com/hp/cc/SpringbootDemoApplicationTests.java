@@ -2,26 +2,23 @@ package com.hp.cc;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.tomcat.jni.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hp.cc.dao.MsgDao;
-import com.hp.cc.dao.UserDao;
+import com.hp.cc.entity.Msg;
+import com.hp.cc.entity.Product;
+import com.hp.cc.entity.SysUser;
 import com.hp.cc.executor.service.ExecutorSercice;
-import com.hp.cc.model.Msg;
-import com.hp.cc.model.SysUser;
+import com.hp.cc.mapper.MsgDao;
+import com.hp.cc.mapper.UserDao;
 import com.hp.cc.redis.RedisService;
+import com.hp.cc.service.IProductService;
 import com.hp.cc.service.UserService;
 
 @RunWith(SpringRunner.class)
@@ -46,13 +43,28 @@ public class SpringbootDemoApplicationTests {
 	@Autowired
 	private MsgDao msgDao;
 	
+	@Autowired
+	private IProductService iProductService;
+	
+	@Test
+	public void testProductService() {
+//		Product product = new Product();
+//		product.setProductName("cola");
+//		product.setProductPrice(3.0);
+//		product.setCreatedBy(1L);
+//		product.setCreateTime(LocalDateTime.now());
+//		iProductService.save(product);
+		
+		System.out.println(iProductService.list().get(0));
+	}
+	
 	@Test
 	public void testMsgDao(){
-//		Msg msg = Msg.builder().createDate(LocalDateTime.now()).title("msg2").content("content2").etraInfo("etraInfo2").build();
-//		msgDao.insert(msg);
+		Msg msg = Msg.builder().createDate(LocalDateTime.now()).title("msg3").content("content3").etraInfo("etraInfo2").build();
+		msgDao.insert(msg);
 		
-		 List<Msg> selectList = msgDao.selectList(null);
-		 selectList.forEach(System.out::println);;
+//		 List<Msg> selectList = msgDao.selectList(null);
+//		 selectList.forEach(System.out::println);;
 	}
 	
 	@Test
