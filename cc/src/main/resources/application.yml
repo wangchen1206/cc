@@ -30,8 +30,11 @@ spring:
       
 #数据库配置
   datasource:
+    #初始化模式
     initialization-mode: always
+    #初始化数据库schema
     schema: classpath:schema.sql
+    #初始化数据
     #data: classpath:schema.sql
     name: test
     url: jdbc:mysql://localhost:3306/cc?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&autoReconnectForPools=true&serverTimezone=Asia/Shanghai&useSSL=false
