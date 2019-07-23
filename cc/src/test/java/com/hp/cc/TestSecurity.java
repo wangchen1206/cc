@@ -1,5 +1,7 @@
 package com.hp.cc;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import javax.net.ssl.SSLContext;
 
 import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
@@ -12,8 +14,11 @@ import org.jivesoftware.smackx.receipts.DeliveryReceiptRequest;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import com.hp.cc.config.TreadPoolConfig;
+import com.hp.cc.entity.Msg;
 
 /**
  * @author ck
@@ -30,6 +35,28 @@ public class TestSecurity {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		System.out.println(bCryptPasswordEncoder.encode("admin").trim());
 		System.out.println(bCryptPasswordEncoder.encode("abel").trim());
+	}
+	
+	@Test
+	public void testAssert() {
+//		Assert.doesNotContain("sss", "s", "does not contain");
+		if(false) {
+			
+		}else {
+			Assert.isTrue(false, "the url doesn't match JDOSS Url");
+		}
+//		Assert.isTrue(true, "not true");
+		
+	}
+	
+	@Test
+	public void testAssert1() {
+		Msg msg = new Msg();
+		if(null == msg) {
+			msg = new Msg();
+		}else {
+			System.out.println(msg);
+		}
 	}
 	
 	static int port = 5222;
