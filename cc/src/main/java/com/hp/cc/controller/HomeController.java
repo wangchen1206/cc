@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.HandlerMapping;
 
 import com.hp.cc.common.Result;
+import com.hp.cc.common.Var;
 import com.hp.cc.entity.Msg;
 import com.hp.cc.entity.SysUser;
+
+import lombok.val;
 
 /**
  * @author ck
@@ -29,6 +33,9 @@ public class HomeController {
 	
 	@Value("${jwt.expiration}")
 	private Integer num;
+	
+	@Autowired
+	private Var val;
 
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@RequestMapping("/home/test")
@@ -54,6 +61,8 @@ public class HomeController {
 	
 	@GetMapping("/home/msg")
 	public Result test(HttpServletRequest request){
+		
+		val.getList().forEach(System.out::println);
 		
 		System.out.println("num is "+ num);
 		Map pathVariables = (Map) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
