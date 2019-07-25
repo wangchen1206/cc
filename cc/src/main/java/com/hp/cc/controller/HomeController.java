@@ -24,6 +24,8 @@ import com.hp.cc.entity.Msg;
 import com.hp.cc.entity.SysUser;
 import com.hp.cc.test.Var;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -33,6 +35,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @RestController
+@Api(tags = "home")
 public class HomeController {
 	
 	@Value("${jwt.expiration}")
@@ -43,6 +46,7 @@ public class HomeController {
 
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@RequestMapping("/home/test")
+	@ApiOperation("index")
 	public Result index(){
 		SysUser user = new SysUser();
 		user.setUsername("scs");

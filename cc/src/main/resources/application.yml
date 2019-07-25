@@ -8,7 +8,12 @@ server:
   port: 8080
   servlet:
     context-path: /cc
+    
+    
 spring:
+  profiles:    active: dev
+  servlet:    multipart:      max-file-size: 10MB      max-request-size: 10MB
+  application:    name: cc        
 ## redis
   redis:
     database: 0
