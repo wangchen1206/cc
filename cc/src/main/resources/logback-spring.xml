@@ -155,7 +155,7 @@
 	</appender>
 
 	<!--指定最基础的日志输出级别 -->
-	<root level="DEBUG">
+	<root level="INFO">
 		<!--appender将会添加到这个logger -->
 		<appender-ref ref="consoleLog1" />
 		<appender-ref ref="fileDebugLog" />

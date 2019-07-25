@@ -1,7 +1,9 @@
 package com.hp.cc.controller;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -18,16 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.HandlerMapping;
 
 import com.hp.cc.common.Result;
-import com.hp.cc.common.Var;
 import com.hp.cc.entity.Msg;
 import com.hp.cc.entity.SysUser;
+import com.hp.cc.test.Var;
 
-import lombok.val;
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * @author ck
  * @date 2019年2月28日 上午11:46:14
  */
+@Slf4j
 @RestController
 public class HomeController {
 	
@@ -35,7 +39,7 @@ public class HomeController {
 	private Integer num;
 	
 	@Autowired
-	private Var val;
+	private Var var;
 
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@RequestMapping("/home/test")
@@ -62,7 +66,13 @@ public class HomeController {
 	@GetMapping("/home/msg")
 	public Result test(HttpServletRequest request){
 		
-		val.getList().forEach(System.out::println);
+		var.getList().forEach(t->log.info("List: "+t));
+		log.info("person: "+var.getPerson());
+		Arrays.asList(var.getStrArray()).forEach(t->log.info("strArray: "+t));
+		Arrays.asList(var.getPersons()).forEach(t->log.info("Persons: "+t));
+		Arrays.asList(var.getNumArray()).forEach(t->log.info("numArray: "+t));
+		var.getValMapList().stream().map(m->m.get("k1")).collect(Collectors.toList()).forEach(t->log.info("ValMapList: "+t));
+		
 		
 		System.out.println("num is "+ num);
 		Map pathVariables = (Map) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);

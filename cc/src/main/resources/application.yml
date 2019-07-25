@@ -39,7 +39,7 @@ spring:
     name: test
     url: jdbc:mysql://localhost:3306/cc?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&autoReconnectForPools=true&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password: 123456
+    password: 111111
     #username: lespms
     #password: root@!123
     #使用druid数据源
@@ -134,3 +134,20 @@ var:
     - list1
     - list2
     - list3
+  persons:  - name: name1
+    age: 11
+    sex: m
+  - name: name2
+    age: 12
+    sex: w
+  numArray: 1,2,3,4
+  strArray: str1,str2,str3,str4
+  person: 
+    name: ck
+    age: 20
+    sex: male
+  valMapList: 
+    - k1: cc
+      k2: 18
+    - k1: v1
+      k2: v2
