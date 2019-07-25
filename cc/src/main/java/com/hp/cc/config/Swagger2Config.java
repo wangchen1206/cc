@@ -5,10 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.google.common.collect.Lists;
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -22,7 +26,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-@Profile("dev")
+@Profile({"dev"})
 public class Swagger2Config {
 
 	@Value("${spring.application.name}")
@@ -30,12 +34,19 @@ public class Swagger2Config {
 	
 	
 	@Bean
+	SecurityScheme apiKey() {
+		return new ApiKey("token", "Authorization", "header");
+	}
+	
+	@Bean
 	public Docket apiInfo() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.groupName("API")
 				.apiInfo(appInfo())
 				.select()
-				.paths(PathSelectors.ant("/home/**")).build();
+//				.paths(PathSelectors.ant("/home/**")).build()
+				.paths(PathSelectors.any()).build()
+				.securitySchemes(Lists.newArrayList(apiKey()));
 	}
 	
 	private ApiInfo appInfo() {

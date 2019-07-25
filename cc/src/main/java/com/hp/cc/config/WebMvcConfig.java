@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
@@ -16,11 +17,13 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 /**
  * 配置fastjson消息转化器
  * 
+ * Spring-boot2.0以上在集成swagger后，配置WebConfig时不要extends WebMvcConfigurationSupport，需要修改为最新的implements WebMvcConfigurer，不然访问http://localhost:8080/swagger-ui.html时读取不到swagger-ui的静态资源文件。
+ * 
  * @author ck
  * @date 2019年2月27日 下午4:40:57
  */
 @Configuration
-public class WebMvcConfig extends WebMvcConfigurationSupport{
+public class WebMvcConfig implements WebMvcConfigurer{
 	
 	/** 默认日期时间格式 */
     public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
@@ -60,9 +63,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport{
      * 配置fastjson消息转化器
      */
     @Override
-    protected void configureMessageConverters(
+	public void configureMessageConverters(
     		List<HttpMessageConverter<?>> converters) {
-    	super.configureMessageConverters(converters);
     	 // fastJson消息转换器
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
 

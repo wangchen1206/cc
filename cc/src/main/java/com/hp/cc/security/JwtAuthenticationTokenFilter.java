@@ -13,14 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.hp.cc.jwt.JwtTokenUtil;
 import com.hp.cc.redis.RedisService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 拦截器 验证令牌的合法性,获取用户信息，存入SecurityContextHolder
@@ -29,17 +29,15 @@ import com.hp.cc.redis.RedisService;
  * @author ck
  * @date 2019年6月18日 下午4:15:17
  */
+@Slf4j
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
-	private final Log logger = LogFactory.getLog(this.getClass());
 	
 	private final String BEARER = "Bearer";
 	
 	@Autowired
 	private RedisService redisService;
 
-	@Autowired
-	private UserDetailsService userDetailsService;
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
@@ -49,10 +47,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 			HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String token = request.getHeader(jwtTokenUtil.getHeader());
+		log.info("token is :"+token);
 		if (!StringUtils.isEmpty(token)) {
 			String tokenExpected = token.substring(BEARER.length());
 			String username = jwtTokenUtil.getUsernameFromToken(tokenExpected);
-			logger.debug("checking authentication for user " + username
+			log.debug("checking authentication for user " + username
 					+ " who is requesting..."
 					+ String.format("%s %s from IP: %s", request.getMethod(),
 							request.getRequestURI(), request.getRemoteAddr()));
@@ -74,7 +73,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 				}
 			}
 		} else {
-			logger.debug("Anoymouse user who is requesting..."
+			log.debug("Anoymouse user who is requesting..."
 					+ String.format("%s %s from IP: %s", request.getMethod(),
 							request.getRequestURI(), request.getRemoteAddr()));
 		}
