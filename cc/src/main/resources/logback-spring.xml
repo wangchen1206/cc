@@ -11,6 +11,12 @@
 	<springProperty scope="context" name="logback.logdir"
 		source="logback.logdir" />
 
+	<substitutionProperty name="log.pattern" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(---){faint} %clr(%-80.80logger{79}){cyan} %clr(:){faint} %m%n%wEx"/>
+ 
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+	<conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+	<conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
 	<!-- 用来定义变量值的标签， 有两个属性，name和value；其中name的值是变量的名称，value的值时变量定义的值。 通过定义的值会被插入到logger上下文中。定义变量后，可以使“${}”来使用变量。 -->
 	<!-- <property name="logback.logdir" value="C:\\Java\\log"/> <property name="logback.appname" 
 		value="springboot"/> -->
@@ -20,7 +26,8 @@
 	<appender name="consoleLog1" class="ch.qos.logback.core.ConsoleAppender">
 		<!--展示格式 layout -->
 		<layout class="ch.qos.logback.classic.PatternLayout">
-			<pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<!-- <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern> -->
+			<pattern>${log.pattern}</pattern>
 		</layout>
 
 		<!-- ThresholdFilter为系统定义的拦截器，例如我们用ThresholdFilter来过滤掉ERROR级别以下的日志不输出 如果不用记得注释掉，不然你控制台会发现没日志~ -->
