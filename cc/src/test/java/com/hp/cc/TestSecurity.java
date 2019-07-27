@@ -107,7 +107,7 @@ public class TestSecurity {
 	@Test
 	public void testBCryptPassword() {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		System.out.println(bCryptPasswordEncoder.encode("admin").trim());
+		System.out.println(bCryptPasswordEncoder.encode("12345678").trim());
 		System.out.println(bCryptPasswordEncoder.encode("abel").trim());
 	}
 
