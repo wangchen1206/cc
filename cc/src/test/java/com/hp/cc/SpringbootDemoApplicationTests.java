@@ -1,7 +1,6 @@
 package com.hp.cc;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,16 +9,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.alibaba.fastjson.JSON;
 import com.hp.cc.entity.Msg;
-import com.hp.cc.entity.Product;
-import com.hp.cc.entity.SysUser;
 import com.hp.cc.executor.service.ExecutorSercice;
 import com.hp.cc.mapper.MsgDao;
-import com.hp.cc.mapper.UserDao;
 import com.hp.cc.redis.RedisService;
 import com.hp.cc.service.IProductService;
-import com.hp.cc.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,11 +28,7 @@ public class SpringbootDemoApplicationTests {
 	@Autowired
 	private ExecutorSercice executorSercice;
 	
-	@Autowired
-	private UserService userService;
 	
-	@Autowired
-	private UserDao userDao;
 	
 	@Autowired
 	private MsgDao msgDao;
@@ -70,8 +60,6 @@ public class SpringbootDemoApplicationTests {
 	@Test
 	public void testMybatisPlus(){
 //		Wrapper<SysUser> wrapper = new Wr
-		List<SysUser> selectList = userDao.selectList(null);
-		selectList.forEach(sysUser->System.out.println(sysUser));
 		
 //		Page<SysUser> page = new Page<>();
 //		page.setCurrent(2).setOptimizeCountSql(true).setSize(1);
@@ -81,21 +69,10 @@ public class SpringbootDemoApplicationTests {
 	
 	@Test
 	public void testUserService(){
-		SysUser user = userService.findByUserName("admin");
-		System.out.println("------------------"+user.getCreateDate());
 	}
 	
 	@Test
 	public void testRedis(){
-		SysUser user = new SysUser();
-		user.setUsername("cc");
-		user.setCreateDate(LocalDateTime.now());
-		redisService.set("cc", user);
-		
-		System.out.println(user.getCreateDate());
-		
-		SysUser user2 = (SysUser) redisService.get("cc");
-		System.out.println(JSON.toJSONString(user2));
 		
 		
 	}

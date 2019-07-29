@@ -1,4 +1,4 @@
-package com.hp.cc.jwt;
+package com.hp.cc.security.jwt;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -32,6 +32,7 @@ public class JwtTokenUtil {
 	private String secret;
 	private Long expiration;
 	private String header;
+	
 
 	/**
 	 * 从数据声明生成令牌

@@ -14,8 +14,6 @@ import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smackx.receipts.DeliveryReceiptRequest;
 
-import com.hp.cc.entity.SysUser;
-
 public class ThreadTask implements Runnable{
 
 	 int port = 5222;
@@ -23,22 +21,17 @@ public class ThreadTask implements Runnable{
 	 String SERVERNAME3 = "192.168.1.105";
 	 String[] sslProtocols = {"TLS", "TLSv1", "TLSv1.1", "TLSv1.2"};
 	
-	private SysUser user;
+	private String username = "";
+	private String password = "";
 	
-	
-	public ThreadTask(SysUser user) {
-		super();
-		this.user = user;
-	}
 
 	@Override
 	public void run() {
-		System.out.println(user);
 		XMPPTCPConnectionConfiguration configBuilder;
 		try {
 			configBuilder = XMPPTCPConnectionConfiguration.builder()
 					.setXmppDomain(SERVERNAME3)
-					.setUsernameAndPassword(user.getUsername(), user.getPassword())
+					.setUsernameAndPassword(username, password)
 					.setSecurityMode(SecurityMode.disabled)
 //				.setSocketFactory(new DummySSLSocketFactory())
 					.setConnectTimeout(45000)

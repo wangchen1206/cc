@@ -1,4 +1,4 @@
-package com.hp.cc.jwt;
+package com.hp.cc.security.jwt;
 
 import java.io.Serializable;
 

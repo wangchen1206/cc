@@ -1,21 +1,18 @@
 package com.hp.cc.security;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.hp.cc.entity.SysRole;
-import com.hp.cc.entity.SysUser;
-import com.hp.cc.jwt.JwtTokenUtil;
-import com.hp.cc.jwt.JwtUser;
+import com.hp.cc.entity.User;
 import com.hp.cc.redis.RedisService;
-import com.hp.cc.service.UserService;
+import com.hp.cc.security.jwt.JwtTokenUtil;
+import com.hp.cc.security.jwt.JwtUser;
+import com.hp.cc.security.jwt.JwtUserFactory;
+import com.hp.cc.service.IUserService;
 
 /**
  * @author ck
@@ -26,7 +23,7 @@ public class JwtUserDetailServiceImpl implements UserDetailsService {
 
 	
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 	
 	@Autowired
 	private RedisService redisService;
@@ -36,14 +33,12 @@ public class JwtUserDetailServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) {
-		SysUser user = userService.findByUserName(username);
+		User user = userService.findUserByUsername(username);
 		if(user == null){
 			throw new UsernameNotFoundException(String.format("用户名%s不存在", username));
 		}else{
-			List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
-					.map(SysRole::getName).map(SimpleGrantedAuthority::new)
-					.collect(Collectors.toList());
-			JwtUser jwtUser = new JwtUser(user.getUsername(), user.getPassword(), user.isEnabled(), authorities);
+			if(!user.getEnabled()) throw new DisabledException(String.format("用户名%s的账户已停用", username));
+			JwtUser jwtUser = JwtUserFactory.createJwtUser(user);
 			redisService.addMap(jwtTokenUtil.getHeader(), username, jwtUser,jwtTokenUtil.getExpiration()/1000);
 			return jwtUser;
 		}

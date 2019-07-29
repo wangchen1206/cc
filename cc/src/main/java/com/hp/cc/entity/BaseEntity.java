@@ -1,6 +1,4 @@
 /**
- * created Dec 29, 2018 by ypzhuang
- * 
  * Base Entity
  */
 

@@ -14,8 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.hp.cc.security.AccessDeniedEntryPoint;
-import com.hp.cc.security.JwtAuthenticationEntryPoint;
 import com.hp.cc.security.JwtAuthenticationTokenFilter;
 
 /**
@@ -37,8 +35,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
-	@Autowired
-	private UserDetailsService userDetailsService;
 
 	// // 处理未认证的request
 	// @Autowired
@@ -60,15 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new JwtAuthenticationTokenFilter();
 	}
 
-	/*
-	 * 添加我们自定义的user detail service 认证
-	 */
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth)
-			throws Exception {
-		auth.userDetailsService(userDetailsService)
-				.passwordEncoder(bCryptPasswordEncoder());
-	}
 
 	/*
 	 * 定义请求规则 配置相关处理器，拦截器

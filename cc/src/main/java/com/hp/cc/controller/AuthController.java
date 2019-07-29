@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hp.cc.common.Result;
-import com.hp.cc.jwt.JwtAuthenticationRequest;
+import com.hp.cc.security.jwt.JwtAuthenticationRequest;
 import com.hp.cc.service.AuthService;
 
 import io.swagger.annotations.Api;

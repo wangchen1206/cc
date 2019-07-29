@@ -1,27 +1,39 @@
 package com.hp.cc.service.impl;
 
+import com.hp.cc.entity.Authority;
+import com.hp.cc.entity.User;
+import com.hp.cc.mapper.UserMapper;
+import com.hp.cc.service.IAuthorityService;
+import com.hp.cc.service.IUserService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.hp.cc.entity.SysUser;
-import com.hp.cc.mapper.UserDao;
-import com.hp.cc.service.UserService;
 
 /**
- * @author ck
- * @date 2019年6月18日 下午4:56:56
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author cc
+ * @since 2019-07-29
  */
 @Service
-@Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
 	@Autowired
-	private UserDao userDao;
+	private IAuthorityService authorityService;
 	
 	@Override
-	public SysUser findByUserName(String username) {
-		return userDao.findByUserName(username);
+	public User findUserByUsername(String username) {
+		User user = this.getOne(new LambdaQueryWrapper<User>().eq(User::getUsername, username));
+		if(user == null) return null;
+		List<Authority> authorities = authorityService.selectByUserId(user.getId());
+		user.setAuthorities(authorities);
+		return user;
 	}
 
 }

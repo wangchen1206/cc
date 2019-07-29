@@ -12,8 +12,6 @@ import org.jivesoftware.smackx.receipts.DeliveryReceiptRequest;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import com.hp.cc.entity.SysUser;
-
 
 /**
  * @author ck
@@ -31,7 +29,7 @@ public class ExecutorSercice {
 	private Executor executor;
 	
 	@Async
-	public void executeAsyncTask(SysUser user) throws Exception{
+//	public void executeAsyncTask(SysUser user) throws Exception{
 //		XMPPTCPConnectionConfiguration configBuilder;
 //		configBuilder = XMPPTCPConnectionConfiguration.builder()
 //				.setXmppDomain(SERVERNAME3)
@@ -49,7 +47,7 @@ public class ExecutorSercice {
 //			sendMsg(connection, user.getUsername()+"@" + SERVERNAME3,
 //					"adminjob@" + SERVERNAME3, msg, Type.chat);
 //		}
-	}
+//	}
 	public static void sendMsg(XMPPTCPConnection connection, String sendfrom,
 			String sendTo, String msg, Type type) throws Exception {
 

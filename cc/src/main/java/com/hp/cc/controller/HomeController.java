@@ -20,7 +20,6 @@ import org.springframework.web.servlet.HandlerMapping;
 
 import com.hp.cc.common.Result;
 import com.hp.cc.entity.Msg;
-import com.hp.cc.entity.SysUser;
 import com.hp.cc.test.Var;
 
 import io.swagger.annotations.Api;
@@ -45,10 +44,10 @@ public class HomeController {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping("/home/test")
 	public Result index(){
-		SysUser user = new SysUser();
-		user.setUsername("scs");
-		user.setCreateDate(LocalDateTime.now());
-		return Result.createBySuccess(user);
+//		SysUser user = new SysUser();
+//		user.setUsername("scs");
+//		user.setCreateDate(LocalDateTime.now());
+		return Result.createBySuccess("success");
 	}
 	
 	@PostMapping("/home/test2")
