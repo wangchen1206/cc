@@ -26,6 +26,8 @@ public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T>{
 		super();
 		// 巨坑！！！Fastjson关于autoType is not support解决 加入自动类型支持
         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
+        ParserConfig.getGlobalInstance().addAccept("com.hp.cc.entity."); 
+        ParserConfig.getGlobalInstance().addAccept("com.hp.cc.security.jwt."); 
 		this.clazz = clazz;
 	}
 

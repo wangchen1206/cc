@@ -11,12 +11,15 @@ public enum DelFlag {
     private final String value;
     private final String desc;
 
+    
     DelFlag(final String value, final String desc) {
         this.value = value;
         this.desc = desc;
     }
+    
 
-    @JsonValue
+
+	@JsonValue
     public String getValue() {
         return value;
     }

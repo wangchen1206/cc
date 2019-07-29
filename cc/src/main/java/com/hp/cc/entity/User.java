@@ -33,10 +33,10 @@ public class User extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @TableLogic
+   // @TableLogic
     @JsonIgnore
     @ApiModelProperty(value = "删除标志")
-    private DelFlag delFlag;
+    private String delFlag;
     
     @ApiModelProperty(value = "邮箱")
     private String email;

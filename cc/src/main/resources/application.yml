@@ -34,7 +34,7 @@ spring:
 #数据库配置
   datasource:
     #初始化模式
-    initialization-mode: always
+    initialization-mode: never
     #初始化数据库schema
     schema: classpath:schema.sql
     #初始化数据
@@ -95,6 +95,7 @@ spring:
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.hp.cc.entity
+  type-enums-package: com.hp.cc.entity.enums
   global-config:
     # 数据库相关配置
     db-config:
@@ -114,10 +115,6 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
   
-mapper:
-  mappers: com.hp.cc.universal.Mapper
-  not-empty: false
-  identity: MYSQL
   
 
 #logging:
@@ -131,6 +128,24 @@ jwt:
   secret: jwtsecret
   expiration: 180000
   header: Authorization
+
+role: 
+  users: 
+    - 
+          #管理员 
+      role: ROLE_MANAGER
+      user: manager
+      password: 12345678
+    - 
+          #超级管理员
+      role: ROLE_SUPER_ADMIN
+      user: superAdmin
+      password: 12345678
+    -
+          #客人
+      role: ROLE_GUEST
+      user: guest
+      password: 12345678
 
 var: 
   list: 

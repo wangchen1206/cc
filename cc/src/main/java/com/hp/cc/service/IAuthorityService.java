@@ -1,6 +1,7 @@
 package com.hp.cc.service;
 
 import com.hp.cc.entity.Authority;
+import com.hp.cc.entity.enums.AuthorityName;
 
 import java.util.List;
 
@@ -17,4 +18,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IAuthorityService extends IService<Authority> {
 
 	public List<Authority> selectByUserId(Long userId) ;
+
+	public Authority getOrCreateAuthorityByName(AuthorityName authorityName);
+	
+	public Authority findAuthorityByName(AuthorityName authorityName);
 }
