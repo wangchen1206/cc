@@ -14,6 +14,7 @@ import com.hp.cc.executor.service.ExecutorSercice;
 import com.hp.cc.mapper.MsgDao;
 import com.hp.cc.redis.RedisService;
 import com.hp.cc.service.IProductService;
+import com.hp.cc.service.IUserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,13 +29,21 @@ public class SpringbootDemoApplicationTests {
 	@Autowired
 	private ExecutorSercice executorSercice;
 	
-	
+	@Autowired
+	private IUserService userService;
 	
 	@Autowired
 	private MsgDao msgDao;
 	
 	@Autowired
 	private IProductService iProductService;
+	
+	@Test
+	public void testLoginDelete() {
+		userService.removeById(4);
+	}
+	
+	
 	
 	@Test
 	public void testProductService() {

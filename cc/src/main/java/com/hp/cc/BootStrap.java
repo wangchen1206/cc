@@ -1,12 +1,18 @@
 package com.hp.cc;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.hp.cc.config.InitUserConfiguration;
+import com.hp.cc.entity.Authority;
+import com.hp.cc.entity.User;
 import com.hp.cc.entity.enums.AuthorityName;
 import com.hp.cc.service.IAuthorityService;
 import com.hp.cc.service.IUserService;
@@ -37,7 +43,24 @@ public class BootStrap {
 	}
 	
 	private void initUsers() {
-		
+		log.info("Bootstrap user accounts");
+		initUserConfig.getUsers().stream().forEach(u->{
+			log.info("init: "+u.getUser());
+			Authority authority = this.authorityService.findAuthorityByName(AuthorityName.getEnum(u.getRole()));
+			User user = this.userService.findUserByUsername(u.getUser());
+			if(user == null) {
+				user = new User();
+				user.setUsername(u.getUser());
+				user.setPassword(new BCryptPasswordEncoder().encode(u.getPassword()));
+				user.setAuthorities(Arrays.asList(authority));
+				user.setName(u.getUser());
+				user.setEmail(u.getUser()+"@cc.com");
+				user.setEnabled(true);
+				user.setLastPasswordResetDate(LocalDateTime.now());
+				this.userService.saveUser(user);
+			}
+			
+		});
 	}
 
 	private void initRoles() {

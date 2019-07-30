@@ -3,19 +3,18 @@ package com.hp.cc.config;
 import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
+import org.springframework.context.annotation.Configuration;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @ConfigurationProperties(prefix = "role")
-@Component
+@Configuration
 @Data
 @NoArgsConstructor
 public class InitUserConfiguration {
 	
-	private List<InitUser> users;
+	List<InitUser> users;
 
 	@Data
 	@NoArgsConstructor

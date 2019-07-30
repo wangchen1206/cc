@@ -23,6 +23,7 @@ public class JwtUser implements UserDetails{
 	private String username;
 	private String name;
 	private String email;
+	@JSONField(serialize = false)
 	private String password;
 	private Boolean enabled;
 	private Collection<? extends GrantedAuthority> authorities;

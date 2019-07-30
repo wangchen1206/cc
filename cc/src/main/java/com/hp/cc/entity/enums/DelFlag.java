@@ -3,7 +3,7 @@ package com.hp.cc.entity.enums;
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum DelFlag {
+public enum DelFlag{
     YES("0", "有效"),
     NO("1", "删除");
 
@@ -19,11 +19,11 @@ public enum DelFlag {
     
 
 
-	@JsonValue
     public String getValue() {
         return value;
     }
 
+    @JsonValue
     public String getDesc() {
         return desc;
     }
