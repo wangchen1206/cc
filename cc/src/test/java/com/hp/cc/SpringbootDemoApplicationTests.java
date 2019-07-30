@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.hp.cc.entity.Msg;
+import com.hp.cc.entity.User;
+import com.hp.cc.entity.UserAuthority;
 import com.hp.cc.executor.service.ExecutorSercice;
 import com.hp.cc.mapper.MsgDao;
 import com.hp.cc.redis.RedisService;
@@ -40,7 +42,8 @@ public class SpringbootDemoApplicationTests {
 	
 	@Test
 	public void testLoginDelete() {
-		userService.removeById(4);
+		User user = userService.findUserByUsername("superAdmin");
+		System.out.println(user.getUsername());
 	}
 	
 	

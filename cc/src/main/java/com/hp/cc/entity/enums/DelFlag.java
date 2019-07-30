@@ -23,6 +23,10 @@ public enum DelFlag{
         return value;
     }
 
+    /**
+     * 向前台展示
+     * @return
+     */
     @JsonValue
     public String getDesc() {
         return desc;

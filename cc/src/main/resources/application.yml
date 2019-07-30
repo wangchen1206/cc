@@ -114,7 +114,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-  
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
   
 
 #logging:

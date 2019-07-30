@@ -7,6 +7,7 @@ import java.util.List;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hp.cc.entity.BaseEntity;
+import com.hp.cc.entity.enums.DelFlag;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -35,7 +36,7 @@ public class User extends BaseEntity {
     @TableLogic
     @JsonIgnore
     @ApiModelProperty(value = "删除标志")
-    private String delFlag;
+    private DelFlag delFlag;
     
     @ApiModelProperty(value = "邮箱")
     private String email;
