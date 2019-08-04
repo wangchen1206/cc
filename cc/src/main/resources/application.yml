@@ -34,7 +34,7 @@ spring:
 #数据库配置
   datasource:
     #初始化模式
-    initialization-mode: never
+    initialization-mode: always
     #初始化数据库schema
     schema: classpath:schema.sql
     #初始化数据
