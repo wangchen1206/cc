@@ -65,6 +65,7 @@ public class BootStrap {
 
 	private void initRoles() {
 		for (AuthorityName authorityName : AuthorityName.values()) {
+			log.info("authorityName is :  "+authorityName);
 			authorityService.getOrCreateAuthorityByName(authorityName);
 		}
 	}

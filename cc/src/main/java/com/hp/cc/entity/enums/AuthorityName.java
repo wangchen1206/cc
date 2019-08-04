@@ -1,5 +1,7 @@
 package com.hp.cc.entity.enums;
 
+import java.util.Arrays;
+
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -34,5 +36,5 @@ public enum AuthorityName implements IEnum<String> {
 		}
 		return null;
 	}
-
+	
 }
