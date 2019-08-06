@@ -133,23 +133,26 @@ public class HttpUtils {
 		HttpPost post = new HttpPost(uploadUrl);
 		HttpEntity reqEntity = null;
 		post.setConfig(requestConfig);
-		FileBody fileBody = new FileBody(file);
+		FileBody fileBody = new FileBody(file,"UTF-8");
 		MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 		builder.addPart("file", fileBody);
 		try {
-			// 循环将params 加入到参数中
-			Set<Entry<String, String>> ketSet = params.entrySet();
-			for (Iterator<Entry<String, String>> iterator = ketSet.iterator(); iterator.hasNext();) {
-				Entry<String, String> entry = (Entry<String, String>) iterator.next();
-				if(!StringUtils.isEmpty(entry.getKey())){
-					StringBody comment = new StringBody((String) entry.getValue(), Charset.forName("UTF-8"));
-					builder.addPart((String) entry.getKey(), comment);
+			if(params != null) {
+				// 循环将params 加入到参数中
+				Set<Entry<String, String>> ketSet = params.entrySet();
+				for (Iterator<Entry<String, String>> iterator = ketSet.iterator(); iterator.hasNext();) {
+					Entry<String, String> entry = (Entry<String, String>) iterator.next();
+					if(!StringUtils.isEmpty(entry.getKey())){
+						StringBody comment = new StringBody((String) entry.getValue(), Charset.forName("UTF-8"));
+						builder.addPart((String) entry.getKey(), comment);
+					}
 				}
 			}
 			reqEntity = builder.build();
 			post.setEntity(reqEntity);
 			response = client.execute(post);
 			String result = EntityUtils.toString(response.getEntity());
+			System.out.println("post file result is :"+result);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();

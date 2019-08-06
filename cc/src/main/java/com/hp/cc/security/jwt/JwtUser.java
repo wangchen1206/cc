@@ -27,6 +27,7 @@ public class JwtUser implements UserDetails{
 	private String password;
 	private Boolean enabled;
 	private Collection<? extends GrantedAuthority> authorities;
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime lastPasswordResetDate;
 	private LocalDateTime lastLoginDate;
 	

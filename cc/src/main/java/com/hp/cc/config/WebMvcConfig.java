@@ -75,7 +75,11 @@ public class WebMvcConfig implements WebMvcConfigurer{
         fastConverter.setSupportedMediaTypes(fastMediaTypes);
         
         fastConverter.setFastJsonConfig(fastJsonConfig());
-        converters.add(fastConverter);
+        converters.add(6,fastConverter);
+        
+        converters.forEach(System.out::println);
+        
+      
     }
 	
 }

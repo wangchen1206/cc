@@ -1,12 +1,10 @@
 package com.hp.cc.entity.enums;
 
-import java.util.Arrays;
-
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum AuthorityName implements IEnum<String> {
+public enum AuthorityName implements IEnum<String>{
 
 	ROLE_MANAGER("ROLE_MANAGER", "管理员"), ROLE_GUEST("ROLE_GUEST", "客户"), ROLE_SUPER_ADMIN("ROLE_SUPER_ADMIN", "超级管理员");
 
@@ -36,5 +34,6 @@ public enum AuthorityName implements IEnum<String> {
 		}
 		return null;
 	}
+	
 	
 }
