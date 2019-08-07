@@ -49,7 +49,7 @@ public class AuthorityServiceImpl extends ServiceImpl<AuthorityMapper, Authority
 
 	@Override
 	public Authority findAuthorityByName(AuthorityName authorityName) {
-		return this.authorityService.getOne(new LambdaQueryWrapper<Authority>().eq(Authority::getName, authorityName));
+		return this.authorityService.getOne(new LambdaQueryWrapper<Authority>().eq(Authority::getName, authorityName.getValue()));
 	}
 
 }

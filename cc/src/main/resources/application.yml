@@ -117,12 +117,14 @@ mybatis-plus:
     default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
   
 
-#logging:
-#  file: C:/Java/log/springboot.log
-logback:
+logging: 
+    level:      root: WARN
+      com.hp.cc: DEBUG
+      org.springframework.web: DEBUG
+#logback:
   #logdir: C:\\Users\\hpadmin\\java\\roam\\log\\roamtest
-  logdir: C:\\Java\\log\\cc
-  appname: cc
+ # logdir: C:\\Java\\log\\cc
+  #appname: cc
   
 jwt: 
   secret: jwtsecret

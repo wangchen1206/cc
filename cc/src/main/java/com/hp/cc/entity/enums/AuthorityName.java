@@ -2,7 +2,6 @@ package com.hp.cc.entity.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.baomidou.mybatisplus.core.enums.IEnum;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum AuthorityName implements IEnum<String>{
 
@@ -20,8 +19,6 @@ public enum AuthorityName implements IEnum<String>{
 	public String getDesc() {
 		return desc;
 	}
-
-	@JsonValue
 	public String getValue() {
 		return value;
 	}
