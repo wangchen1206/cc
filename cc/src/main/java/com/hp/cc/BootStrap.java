@@ -14,6 +14,7 @@ import com.hp.cc.config.InitUserConfiguration;
 import com.hp.cc.entity.Authority;
 import com.hp.cc.entity.User;
 import com.hp.cc.entity.enums.AuthorityName;
+import com.hp.cc.msg.mqtt.MyMqttGateway;
 import com.hp.cc.service.IAuthorityService;
 import com.hp.cc.service.IUserService;
 
@@ -32,14 +33,17 @@ public class BootStrap {
 	
 	@Autowired
 	private InitUserConfiguration initUserConfig;
+	
 	/**
 	 * 在服务器启动之后运行，init data.只能被服务器调用一次
 	 */
 	@PostConstruct
 	private void initUser() {
+		
+		
 		log.info("BootStrap init users");
-		initRoles();
-		initUsers();
+//		initRoles();
+//		initUsers();
 	}
 	
 	private void initUsers() {

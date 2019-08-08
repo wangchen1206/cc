@@ -11,9 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.hp.cc.entity.Msg;
 import com.hp.cc.entity.User;
-import com.hp.cc.entity.UserAuthority;
 import com.hp.cc.executor.service.ExecutorSercice;
 import com.hp.cc.mapper.MsgDao;
+import com.hp.cc.msg.mqtt.MyMqttGateway;
 import com.hp.cc.redis.RedisService;
 import com.hp.cc.service.IProductService;
 import com.hp.cc.service.IUserService;
@@ -39,6 +39,14 @@ public class SpringbootDemoApplicationTests {
 	
 	@Autowired
 	private IProductService iProductService;
+	
+	@Autowired
+	private MyMqttGateway myGateway;
+	
+	@Test
+	public void testMqttSend() {
+		myGateway.sendToMqtt(LocalDateTime.now()+"------ test data");
+	}
 	
 	@Test
 	public void testLoginDelete() {
