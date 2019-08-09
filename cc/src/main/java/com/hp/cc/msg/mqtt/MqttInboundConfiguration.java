@@ -24,7 +24,14 @@ public class MqttInboundConfiguration {
 	
 	private static final String CLIENTID = "clientId1";
 	private static final String URL = "tcp://localhost:1883";
-	private static final String topic = "cc";
+	/**
+	 * # 匹配 cc/a   cc/a/b/c
+	 */
+//	private static final String topic = "cc/#";
+	/**
+	 * + 匹配单个  只能是   cc/a cc/b
+	 */
+	private static final String topic = "cc/+";
 
 	
 	@Autowired
