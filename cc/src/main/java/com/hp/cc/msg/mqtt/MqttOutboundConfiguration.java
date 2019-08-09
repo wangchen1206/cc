@@ -20,6 +20,7 @@ import com.hp.cc.util.SslUtil;
 @IntegrationComponentScan
 public class MqttOutboundConfiguration {
 
+//	private static final String URL = "tcp://localhost:1883";
 	private static final String URL = "ssl://localhost:8883";
 	private static final String USERNAME = "test1";
 	private static final String PASSWORD = "123";
@@ -30,6 +31,11 @@ public class MqttOutboundConfiguration {
 
 	@Bean
 	public MqttConnectOptions mqttConnectOptions() {
+		/**
+		 * debug 模式 方便调试
+		 */
+//		System.setProperty("javax.net.debug", "all");
+		
 		MqttConnectOptions options = new MqttConnectOptions();
 		options.setServerURIs(new String[] { URL });
 		options.setUserName(USERNAME);

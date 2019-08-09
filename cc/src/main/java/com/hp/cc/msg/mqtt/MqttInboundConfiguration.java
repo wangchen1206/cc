@@ -23,7 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MqttInboundConfiguration {
 	
 	private static final String CLIENTID = "clientId1";
-	private static final String URL = "tcp://localhost:1883";
+//	private static final String URL = "tcp://localhost:1883";
+	private static final String URL = "ssl://localhost:8883";
 	/**
 	 * # 匹配 cc/a   cc/a/b/c
 	 */
