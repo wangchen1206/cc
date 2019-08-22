@@ -14,7 +14,6 @@ import com.hp.cc.config.InitUserConfiguration;
 import com.hp.cc.entity.Authority;
 import com.hp.cc.entity.User;
 import com.hp.cc.entity.enums.AuthorityName;
-import com.hp.cc.msg.mqtt.MyMqttGateway;
 import com.hp.cc.service.IAuthorityService;
 import com.hp.cc.service.IUserService;
 
