@@ -1,7 +1,5 @@
 package com.hp.cc.msg.mqtt;
 
-import javax.net.ssl.SSLSocketFactory;
-
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +32,7 @@ public class MqttOutboundConfiguration {
 		/**
 		 * debug 模式 方便调试
 		 */
-//		System.setProperty("javax.net.debug", "all");
+		System.setProperty("javax.net.debug", "all");
 		
 		MqttConnectOptions options = new MqttConnectOptions();
 		options.setServerURIs(new String[] { URL });
@@ -44,9 +42,8 @@ public class MqttOutboundConfiguration {
 
 		// SSL
 		try {
-			SSLSocketFactory socketFactory = SslUtil.getSocketFactory(cerPath + "ca.crt", cerPath + "client.crt",
-					cerPath + "client.key", cerPawd);
-			options.setSocketFactory(socketFactory);
+			options.setSocketFactory(SslUtil.getSocketFactory(cerPath + "ca.crt", cerPath + "client.crt",
+					cerPath + "client.key", cerPawd));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
