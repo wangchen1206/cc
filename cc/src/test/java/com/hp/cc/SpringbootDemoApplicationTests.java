@@ -45,7 +45,7 @@ public class SpringbootDemoApplicationTests {
 	
 	@Test
 	public void testMqttSend() {
-		myGateway.sendToMqtt(LocalDateTime.now()+"------ test data");
+		myGateway.sendToMqtt("topic1",1,true,LocalDateTime.now()+"------ test fefefefefef  data");
 	}
 	
 	@Test

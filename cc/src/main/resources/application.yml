@@ -41,7 +41,7 @@ spring:
     #初始化数据
     #data: classpath:schema.sql
     name: test
-    url: jdbc:mysql://192.168.199.129:33306/cc?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&autoReconnectForPools=true&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://localhost:33306/cc?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&autoReconnectForPools=true&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: 111111
     #username: lespms

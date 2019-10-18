@@ -18,8 +18,8 @@ import com.hp.cc.util.SslUtil;
 @IntegrationComponentScan
 public class MqttOutboundConfiguration {
 
-//	private static final String URL = "tcp://localhost:1883";
-	private static final String URL = "ssl://localhost:8883";
+	private static final String URL = "tcp://localhost:1883";
+//	private static final String URL = "ssl://localhost:8883";
 	private static final String USERNAME = "test1";
 	private static final String PASSWORD = "123";
 	private static final String CLIENTID = "clientId1";
@@ -36,17 +36,17 @@ public class MqttOutboundConfiguration {
 		
 		MqttConnectOptions options = new MqttConnectOptions();
 		options.setServerURIs(new String[] { URL });
-		options.setUserName(USERNAME);
-		options.setPassword(PASSWORD.toCharArray());
+//		options.setUserName(USERNAME);
+//		options.setPassword(PASSWORD.toCharArray());
 		options.setCleanSession(false);
 
 		// SSL
-		try {
-			options.setSocketFactory(SslUtil.getSocketFactory(cerPath + "ca.crt", cerPath + "client.crt",
-					cerPath + "client.key", cerPawd));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			options.setSocketFactory(SslUtil.getSocketFactory(cerPath + "ca.crt", cerPath + "client.crt",
+//					cerPath + "client.key", cerPawd));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		return options;
 	}
 
